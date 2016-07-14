@@ -1,0 +1,99 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="review.rfsepolicy">
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <include package="plone.principalsource" />
+  <include package="collective.phantasy" />
+
+  <include package=".upgrades" />
+  <genericsetup:registerProfile
+      name="default"
+      title="review.rfsepolicy"
+      directory="profiles/default"
+      description="Installs the review.rfsepolicy package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+	<browser:page
+	    name="excelexport.xls"
+	    for="Products.ATContentTypes.interfaces.topic.IATTopic"
+	    class=".export.TopicExcelExport"
+	    permission="zope2.View"
+	   />
+
+    <browser:page
+        name="excelexport.xls"
+        for="Products.ATContentTypes.interfaces.folder.IATFolder"
+        class=".export.FolderExcelExport"
+        permission="zope2.View"
+       />
+
+   <browser:viewlet
+        for="Products.ATContentTypes.interfaces.topic.IATTopic"
+        view="plone.app.layout.globals.interfaces.IViewView"
+        name="review.rfsepolicy.excelexport"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        class=".export.ExportButton"
+        permission="zope2.View"
+        layer="review.rfsepolicy.interfaces.IRFSELayer"
+     />
+
+   <browser:viewlet
+        for="Products.ATContentTypes.interfaces.folder.IATFolder"
+        view="plone.app.layout.globals.interfaces.IViewView"
+        name="review.rfsepolicy.excelexport"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        class=".export.ExportButton"
+        permission="zope2.View"
+        layer="review.rfsepolicy.interfaces.IRFSELayer"
+     />
+
+  <include package="iw.rejectanonymous" />
+  <class class="Products.CMFPlone.Portal.PloneSite">
+    <implements interface="iw.rejectanonymous.IPrivateSite" />
+  </class>
+
+  <adapter
+        factory=".listing.RFSEListingRights"
+        provides="collective.edm.listing.interfaces.IEDMListingRights"
+		 />
+
+  <adapter
+        factory=".listing.RFSEListingOptions"
+        provides="collective.edm.listing.interfaces.IEDMListingOptions"
+		 />
+
+  <adapter
+       factory=".listing.AuthorColumn" name="author" />
+
+  <adapter factory=".index.searchable" name="SearchableText" />
+
+  <adapter
+       for="*"
+       provides="plone.stringinterp.interfaces.IStringSubstitution"
+       factory=".contentrules.ReferentEmailSubstitution"
+       name="referent_email"
+       />
+
+  <adapter
+       for="*"
+       provides="plone.stringinterp.interfaces.IStringSubstitution"
+       factory=".contentrules.ReviewStateLabelSubstitution"
+       name="review_state_label"
+       />
+
+  <adapter
+       for="*"
+       provides="plone.stringinterp.interfaces.IStringSubstitution"
+       factory=".contentrules.ArticleAuthorSubstitution"
+       name="article_author"
+       />
+
+</configure>

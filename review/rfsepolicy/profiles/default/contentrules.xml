@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<contentrules>
+ <rule name="rule-1"
+    title="Notification du référent lors du demande de réévaluation"
+    description="Le référent reçoit un mail si le document repasse en évaluation"
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>article</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.WorkflowTransition">
+    <property name="wf_transitions">
+     <element>demander-une-nouvelle-evaluation</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Mail">
+    <property name="source"></property>
+    <property name="message">Bonjour,
+
+          Une nouvelle version de l'article de ${article_author},
+          intitulé "${title}",
+          vient d'être ajoutée sur le site intranet.
+
+          En tant que référent-e de cet article,
+          vous êtes invité-e à le consulter à cette adresse :
+          ${url}
+
+          Cordialement,
+
+          L'intranet de la RFSE</property>
+    <property name="recipients">${referent_email}</property>
+    <property
+       name="subject">[RFSE] Nouvelle version de l'article de ${article_author}</property>
+   </action>
+   <action type="plone.actions.Notify">
+    <property
+       name="message">Le référent a été averti par courriel</property>
+    <property name="message_type">info</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-2"
+    title="Notification du référent à l'ajout d'un rapport" description=""
+    enabled="True" event="zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>report</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Mail">
+    <property name="source"/>
+    <property name="message">Bonjour,
+
+     Un rapport concernant un article de ${article_author}
+     dont vous êtes référent-e a été ajouté.
+
+     Vous êtes invité-e à le consulter à cette adresse :
+     ${parent_url}
+
+     Cordialement,
+
+     L'intranet de la RFSE</property>
+    <property name="recipients">${referent_email}</property>
+    <property
+       name="subject">[Intranet RFSE] Un rapport a été ajouté à l'article de ${article_author}</property>
+   </action>
+   <action type="plone.actions.Logger">
+    <property name="message">Le référent a été averti par email</property>
+    <property name="targetLogger">rule_log</property>
+    <property name="loggingLevel">1000</property>
+   </action>
+   <action type="plone.actions.Notify">
+    <property name="message">Le référent a été averti par email</property>
+    <property name="message_type">info</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-3" title="Déplacer les articles en cours d'évaluation"
+    description="" enabled="True"
+    event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowState">
+    <property name="wf_states">
+     <element>article-en-evaluation</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Move">
+    <property name="target_folder">/articles-en-evaluation</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-4" title="Déplacer les articles acceptés" description=""
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowState">
+    <property name="wf_states">
+     <element>article-accepte</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Move">
+    <property name="target_folder">/articles-acceptes</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-5" title="Déplacer les articles refusés" description=""
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.WorkflowState">
+    <property name="wf_states">
+     <element>cadavre</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Move">
+    <property name="target_folder">/articles-refuses</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-6" title="Déplacer les articles évalués" description=""
+    enabled="True" event="Products.CMFCore.interfaces.IActionSucceededEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>article</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.WorkflowState">
+    <property name="wf_states">
+     <element>article-evalue</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Move">
+    <property name="target_folder">/articles-evalues</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-7"
+    title="Message invitant l'utilisateur ayant modifié un document évalué à le repasser en évaluation"
+    description="Si un utilisateur modifie un article évalué, affiche un message lui indiquant qu'il doit éventuellement le repasser en évaluation"
+    enabled="True" event="zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>article</element>
+    </property>
+   </condition>
+   <condition type="plone.conditions.WorkflowState">
+    <property name="wf_states">
+     <element>article-evalue</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Notify">
+    <property
+       name="message">Attention, si vous venez d'ajouter une nouvelle version de l'article, pensez à changer le statut de l'article, c'est à dire à le repasser en évaluation (sinon le référent ne recevra pas le mail)</property>
+    <property name="message_type">warning</property>
+   </action>
+  </actions>
+ </rule>
+ <rule name="rule-8"
+    title="Envoi d'un mail à l'ajout d'un compte rendu d'ouvrage"
+    description="Lorsqu'un compte rendu d'ouvrage est ajouté, un email est envoyé à Bernard Convert et Joëlle Cichinni"
+    enabled="True" event="zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>compterendu</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Mail">
+    <property name="source"/>
+    <property name="message">Bonjour,
+
+     Un compte-rendu d'ouvrage
+     ${title}
+     ${article_author}
+     vient d'être ajouté.
+
+     Vous êtes invités à le consulter et à apporter éventuellement vos modifications.
+
+     ${url}
+
+     Bien cordialement,
+
+     L'intranet de la RFSE
+
+     PS : rappel de la marche à suivre
+     1 - Ouvrez la page correspondant au compte-rendu (ne restez pas sur la page liste)
+     2 - Téléchargez le compte rendu sur votre PC (la version originale ou la version déjà révisée par votre collègue)
+     3 - Effectuez les modifications
+     4 - Glissez-déposez votre version révisée</property>
+    <property name="recipients">thomas.desvenain@gmail.com</property>
+    <property
+       name="subject">Un compte-rendu d'ouvrage vient d'être mis en ligne</property>
+   </action>
+   <action type="plone.actions.Notify">
+    <property
+       name="message">Un courriel  a été envoyé aux personnes concernées</property>
+    <property name="message_type">info</property>
+   </action>
+  </actions>
+ </rule>
+ <assignment name="rule-4" bubbles="True" enabled="True"
+    location="/articles-en-evaluation"/>
+ <assignment name="rule-5" bubbles="True" enabled="True"
+    location="/articles-en-evaluation"/>
+ <assignment name="rule-3" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-2" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-4" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-5" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-6" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-1" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-7" bubbles="True" enabled="True" location=""/>
+ <assignment name="rule-8" bubbles="True" enabled="True" location=""/>
+</contentrules>

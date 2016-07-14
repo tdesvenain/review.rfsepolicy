@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<layers>
+  <layer name="review.rfsepolicy"
+         interface="review.rfsepolicy.interfaces.IRFSELayer" />
+</layers>

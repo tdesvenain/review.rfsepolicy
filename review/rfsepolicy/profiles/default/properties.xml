@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<site>
+ <property
+    name="title">Intranet de la Revue Française de Socio-Économie</property>
+ <property name="email_from_address"
+    type="string">helene.ducourant@gmail.com</property>
+ <property name="email_from_name" type="string">Intranet de la RFSE</property>
+</site>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<portlets>
+ <assignment name="ajouter-des-rapports" category="content_type" key="article"
+    manager="plone.leftcolumn"
+    type="collective.quickupload.QuickUploadPortlet" visible="True">
+  <property name="header">Ajouter des rapports</property>
+  <property name="upload_media_type"/>
+  <property name="upload_portal_type">report</property>
+ </assignment>
+ <assignment name="navigation" category="context" key="/"
+    manager="plone.leftcolumn" type="portlets.Navigation" visible="False">
+ </assignment>
+  <assignment name="articles-dont-je-suis-referent" category="context" key="/"
+    manager="plone.leftcolumn" type="plone.portlet.collection.Collection"
+    visible="True">
+  <property name="show_more">True</property>
+  <property name="header">Articles dont je suis référent</property>
+  <property name="limit">10</property>
+  <property
+     name="target_collection">/les-articles-dont-je-suis-referent</property>
+  <property name="random">False</property>
+  <property name="show_dates">False</property>
+ </assignment>
+
+</portlets>

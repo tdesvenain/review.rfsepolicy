@@ -1,0 +1,31 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           i18n_domain="bonduellequality">
+
+  <genericsetup:upgradeStep
+      title="Migration profile for review.policy to 2"
+      description="Migration profile for review.policy to 2"
+      source="1"
+      destination="2"
+      handler=".upgrades.v2"
+      profile="review.rfsepolicy:default" />
+
+  <genericsetup:upgradeStep
+      title="Migration profile for review.policy to 3"
+      description="Migration profile for review.policy to 3"
+      source="2"
+      destination="3"
+      handler=".upgrades.v3"
+      profile="review.rfsepolicy:default" />
+
+  <genericsetup:upgradeStep
+      title="Migration profile for review.policy to 4"
+      description="Migration profile for review.policy to 4"
+      source="3"
+      destination="4"
+      handler=".upgrades.v4"
+      profile="review.rfsepolicy:default" />
+
+
+</configure>
