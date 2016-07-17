@@ -11,6 +11,7 @@ from zope.schema import getFieldsInOrder
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.common import ViewletBase
+from plone.namedfile.file import NamedBlobFile
 
 
 titlestyle = xl.easyxf('font: height 300, name Times New Roman, colour_index black, bold on, italic off; '
@@ -123,7 +124,14 @@ class ExcelExport(BrowserView):
                 if not value:
                     value = ""
 
-                sheet.write(row, num+3, str(value), cellstyle)
+                if type(value) == unicode:
+                    cellvalue = value.encode('utf-8')
+                elif type(value) == NamedBlobFile:
+                    cellvalue = value.filename.encode('utf-8')
+                else:
+                    cellvalue = str(value)
+
+                sheet.write(row, num + 3, cellvalue, cellstyle)
 
 
         # enregistre le fichier
