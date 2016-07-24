@@ -41,9 +41,17 @@ cellstyle = xl.easyxf('font: height 250, name Times New Roman, colour_index blac
                      'borders: top thin, bottom thin, left thin, right thin;'
                      'pattern: pattern solid, back_colour white, fore_colour white'
                      )
+
+remarques_cellstyle = xl.easyxf('font: height 250, name Times New Roman, colour_index black, bold off; '
+                     'align: wrap on, vert top, horiz left;'
+                     'borders: top thin, bottom thin, left thin, right thin;'
+                     'pattern: pattern solid, back_colour white, fore_colour white'
+                     )
+
+
 row_height = 1800
 
-ignored = ('file',)
+ignored = ('file', 'remarques')
 
 class ExcelExport(BrowserView):
 
@@ -92,14 +100,14 @@ class ExcelExport(BrowserView):
                             if name not in ignored]
         for num, fieldinfo in enumerate(fields):
             name, field = fieldinfo
-            sheet.col(num+3).width = 256 * 15
+            sheet.col(num + 3).width = 256 * 15
             sheet.write(headerline, num+3, field.title, headerstyle)
 
         sheet.row(headerline).height = row_height
 
         # lignes de valeurs
         for numart, obj in enumerate(self.get_contents()):
-            row = numart+headerline+1
+            row = 2 * numart + headerline + 1
 
             sheet.row(row).height = row_height
 
@@ -107,7 +115,7 @@ class ExcelExport(BrowserView):
             sheet.write(row, 0, str(numart), numcellstyle)
 
             # title
-            sheet.write(row, 1, obj.Title(), titlecellstyle)
+            sheet.write_merge(row, row + 1, 1, 1, obj.Title(), titlecellstyle)
 
             # état
             review_state = wtool.getInfoFor(obj, 'review_state')
@@ -118,6 +126,7 @@ class ExcelExport(BrowserView):
             for num, fieldinfo in enumerate(fields):
                 name, field = fieldinfo
                 value = getattr(obj, name, "")
+
                 if isinstance(value, datetime):
                     value = value.strftime('%d/%m/%Y')
 
@@ -132,6 +141,13 @@ class ExcelExport(BrowserView):
                     cellvalue = str(value)
 
                 sheet.write(row, num + 3, cellvalue, cellstyle)
+                # if obj.remarques:
+                # else:
+                    #sheet.write_merge(row, row + 1, num + 3, num + 4, cellvalue, cellstyle)
+
+            #if obj.remarques:
+            sheet.write_merge(row + 1, row + 1, 2, len(fields) + 2, obj.remarques, remarques_cellstyle)
+            sheet.row(row + 1).height = len(obj.remarques.split('\n')) * 300 if obj.remarques else 0
 
 
         # enregistre le fichier
