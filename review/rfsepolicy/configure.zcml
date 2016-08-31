@@ -10,7 +10,6 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <include package="plone.principalsource" />
-  <include package="collective.phantasy" />
 
   <include package=".upgrades" />
   <genericsetup:registerProfile
@@ -59,19 +58,6 @@
   <class class="Products.CMFPlone.Portal.PloneSite">
     <implements interface="iw.rejectanonymous.IPrivateSite" />
   </class>
-
-  <adapter
-        factory=".listing.RFSEListingRights"
-        provides="collective.edm.listing.interfaces.IEDMListingRights"
-		 />
-
-  <adapter
-        factory=".listing.RFSEListingOptions"
-        provides="collective.edm.listing.interfaces.IEDMListingOptions"
-		 />
-
-  <adapter
-       factory=".listing.AuthorColumn" name="author" />
 
   <adapter factory=".index.searchable" name="SearchableText" />
 

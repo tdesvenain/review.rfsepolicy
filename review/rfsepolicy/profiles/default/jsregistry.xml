@@ -166,26 +166,15 @@
     inline="False"/>
  <javascript authenticated="True" bundle="default" cacheable="True"
     compression="safe" conditionalcomment="" cookable="True" enabled="True"
-    expression="" id="++resource++quickupload_static/swfobject.js"
-    inline="False"/>
- <javascript authenticated="True" bundle="default" cacheable="True"
-    compression="safe" conditionalcomment="" cookable="True" enabled="True"
     expression="" id="++resource++quickupload_static/jquery.uploadify.js"
     inline="False"/>
  <javascript authenticated="True" bundle="default" cacheable="True"
     compression="safe" conditionalcomment="" cookable="True" enabled="True"
     expression="" id="++resource++quickupload_static/fileuploader.js"
     inline="False"/>
- <javascript authenticated="True" bundle="default" cacheable="True"
-    compression="safe" conditionalcomment="" cookable="True" enabled="True"
-    expression="" id="++resource++quickupload_static/helpers.js"
-    inline="False"/>
  <javascript authenticated="False" bundle="default" cacheable="True"
     compression="safe" conditionalcomment="" cookable="True" enabled="True"
     expression="" id="++resource++imageeditor/editlink.js" inline="False"/>
- <javascript authenticated="True" bundle="default" cacheable="True"
-    compression="safe" conditionalcomment="" cookable="True" enabled="True"
-    expression="" id="++resource++collective.edm.listing.js" inline="False"/>
  <javascript authenticated="False" bundle="default" cacheable="True"
     compression="safe" conditionalcomment="" cookable="True" enabled="True"
     expression="" id="collective.js.jqueryui.custom.min.js" inline="False"/>

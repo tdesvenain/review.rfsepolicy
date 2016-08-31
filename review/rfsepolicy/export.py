@@ -13,7 +13,6 @@ from Products.CMFCore.utils import getToolByName
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.namedfile.file import NamedBlobFile
 
-
 titlestyle = xl.easyxf('font: height 300, name Times New Roman, colour_index black, bold on, italic off; '
                         'align: wrap on, vert center, horiz center; '
                         'borders: top thin, bottom thin, left thin, right thin; '
@@ -184,4 +183,3 @@ class ExportButton(ViewletBase):
                 <span>Export excel</span></a>
                """ % {'url': self.context.absolute_url(),
                       'portal_url': self.site_url}
-

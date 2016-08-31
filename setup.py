@@ -26,10 +26,7 @@ setup(name='review.rfsepolicy',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'collective.edm.listing',
-          'collective.quickupload',
-          'collective.phantasy',
-          'Products.ImageEditor',
+          'ecreall.helpers.upgrade',
           'iw.rejectanonymous',
           'plone.app.dexterity',
           'plone.app.versioningbehavior',

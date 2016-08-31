@@ -2,14 +2,9 @@
 <metadata>
   <version>4</version>
   <dependencies>
-    <dependency>profile-collective.quickupload:default</dependency>
-    <dependency>profile-collective.phantasy:default</dependency>
-    <dependency>profile-collective.phantasy:default</dependency>
     <dependency>profile-plone.app.dexterity:default</dependency>
-    <dependency>profile-Products.ImageEditor:default</dependency>
-    <dependency>profile-uwosh.northstar:default</dependency>
+    <dependency>profile-plone.app.workflow:default</dependency>
     <dependency>profile-plone.app.versioningbehavior:default</dependency>
-    <dependency>profile-collective.edm.listing:default</dependency>
     <dependency>profile-collective.z3cform.datetimewidget:default</dependency>
   </dependencies>
 </metadata>

@@ -1,4 +1,4 @@
-from collective.edm.listing.interfaces import IEDMListingLayer
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
-class IRFSELayer(IEDMListingLayer):
+class IRFSELayer(IDefaultBrowserLayer):
     pass

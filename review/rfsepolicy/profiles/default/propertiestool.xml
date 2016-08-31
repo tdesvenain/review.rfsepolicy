@@ -110,11 +110,5 @@
   <property name="allow_external_login_sites" type="lines"/>
   <property name="checkout_workflow_policy"
      type="string">checkout_workflow_policy</property>
-  <property name="use_folder_tabs" type="lines">
-   <element value="PhantasySkin"/>
-   <element value="PhantasySkinsRepository"/>
-  </property>
-  <property name="phantasy_skin_portal_type" type="string">
-   PhantasySkin</property>
  </object>
 </object>
