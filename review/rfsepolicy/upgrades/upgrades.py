@@ -47,10 +47,12 @@ def v2(context):
                                                 portal.REQUEST.RESPONSE,
                                                 portal.REQUEST.URL1)
 
+
 def v3(context):
     context.runImportStepFromProfile('profile-review.rfsepolicy:default',
                         'jsregistry', run_dependencies=False, purge_old=False)
     IUpgradeTool(context).runImportStep('review.rfsepolicy', 'browserlayer')
+
 
 def v4(context):
     from plone.namedfile.file import NamedBlobFile
@@ -59,7 +61,7 @@ def v4(context):
     tool.installProduct('plone.app.workflowmanager')
     tool.uninstallProduct('plone.app.versioningbehavior')
     tool.installProduct('plone.app.versioningbehavior')
-    IUpgradeTool(context).runImportStep('review.rfsepolicy', 'typeinfo')
+    tool.runImportStep('review.rfsepolicy', 'typeinfo')
     tool.portal.portal_catalog.manage_catalogReindex(context.REQUEST, context.REQUEST.RESPONSE, '')
     if 'portal_subskinstool' in tool.portal:
         tool.portal.manage_delObjects(['portal_subskinstool'])
@@ -94,3 +96,9 @@ def v4(context):
         obj.file = namedblobfile
 
     tool.migrateContent('report', migrate_report_file, nofail=True)
+
+
+def v5(context):
+    tool = IUpgradeTool(context)
+    tool.runImportStep('review.rfsepolicy', 'worfklowtool')
+    tool.runImportStep('review.rfsepolicy', 'contentrules')
