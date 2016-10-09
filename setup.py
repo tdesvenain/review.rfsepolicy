@@ -27,6 +27,7 @@ setup(name='review.rfsepolicy',
           'setuptools',
           # -*- Extra requirements: -*-
           'ecreall.helpers.upgrade',
+          'collective.js.jqueryui',
           'iw.rejectanonymous',
           'plone.app.dexterity',
           'plone.app.versioningbehavior',
