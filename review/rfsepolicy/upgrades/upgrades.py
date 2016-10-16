@@ -102,3 +102,4 @@ def v5(context):
     tool = IUpgradeTool(context)
     tool.runImportStep('review.rfsepolicy', 'worfklowtool')
     tool.runImportStep('review.rfsepolicy', 'contentrules')
+    tool.runImportStep('review.rfsepolicy', 'typeinfo')
