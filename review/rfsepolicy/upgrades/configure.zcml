@@ -28,8 +28,8 @@
       profile="review.rfsepolicy:default" />
 
   <genericsetup:upgradeStep
-      title="Migration profile for review.policy to 4"
-      description="Migration profile for review.policy to 4"
+      title="Migration profile for review.policy to 5"
+      description="Migration profile for review.policy to 5"
       source="4"
       destination="5"
       handler=".upgrades.v5"

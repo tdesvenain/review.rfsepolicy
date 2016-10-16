@@ -210,7 +210,7 @@ class ExportButton(ViewletBase):
                     <img width="16" height="16" title="Export excel" alt="Export excel"
                          src="%(portal_url)s/xls.png">
                 <span>Export excel de "%(title)s"</span></a>
-               """ % {'title': self.context.Title(),
+               """ % {'title': self.context.Title().decode('utf-8'),
                       'url': self.context.absolute_url(),
                       'portal_url': self.site_url}
 
