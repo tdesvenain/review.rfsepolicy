@@ -81,6 +81,10 @@ class ExcelExport(BrowserView):
         sheet = xlDoc.add_sheet('Articles')
         sheet.col(0).width = 256 * 5
         sheet.col(1).width = 256 * 40
+        sheet.col(2).width = 256 * 25
+        sheet.col(3).width = 256 * 50
+        sheet.col(4).width = 256 * 20
+        sheet.col(5).width = 256 * 20
         headerline = 3
 
         # schema de l'article
@@ -88,7 +92,7 @@ class ExcelExport(BrowserView):
 
         # case de titre
         sheet.row(1).height = 1200
-        sheet.write_merge(1, 1, 1, 10,
+        sheet.write_merge(1, 1, 1, 5,
                           "Revue Française de Socio-Economie -%s" % self.context.Title(),
                           titlestyle)
 
@@ -96,11 +100,11 @@ class ExcelExport(BrowserView):
         sheet.write(headerline, 0, "", numcellstyle)
         sheet.write(headerline, 1, u"Titre", headerstyle)
         sheet.write(headerline, 2, u"État", headerstyle)
-        fields = [(name, field) for name, field in getFieldsInOrder(schema)
-                            if name not in ignored]
+        fields = [(name, field)
+                  for name, field in getFieldsInOrder(schema)
+                  if name in ('auteur', 'date_de_r_ception', 'referent_user')]
         for num, fieldinfo in enumerate(fields):
             name, field = fieldinfo
-            sheet.col(num + 3).width = 256 * 15
             sheet.write(headerline, num+3, field.title, headerstyle)
 
         sheet.row(headerline).height = row_height
@@ -123,6 +127,7 @@ class ExcelExport(BrowserView):
             sheet.write(row, 2, state, cellstyle)
 
             # dynamic fields
+            sheet.row(row).height = 350
             for num, fieldinfo in enumerate(fields):
                 name, field = fieldinfo
                 value = getattr(obj, name, "")
@@ -145,9 +150,32 @@ class ExcelExport(BrowserView):
                 # else:
                     #sheet.write_merge(row, row + 1, num + 3, num + 4, cellvalue, cellstyle)
 
-            #if obj.remarques:
-            sheet.write_merge(row + 1, row + 1, 2, len(fields) + 2, obj.remarques, remarques_cellstyle)
-            sheet.row(row + 1).height = len(obj.remarques.split('\n')) * 300 if obj.remarques else 0
+            # ligne de remarques
+            remarques = u""
+            if obj.evaluateur_1:
+                remarques += u"Évaluateur 1: %s - envoi: %s - evaluation: %s - réponse: %s\n" % (
+                    obj.evaluateur_1,
+                    obj.dateenvoi_1 and obj.dateenvoi_1.strftime('%d/%m/%Y') or u"?",
+                    obj.date_evaluation_evaluateur_1 and obj.date_evaluation_evaluateur_1.strftime('%d/%m/%Y') or u"?",
+                    obj.reponse_1 or u"?")
+
+            if obj.evaluateur_2:
+                remarques += u"Évaluateur 2: %s - envoi: %s - evaluation: %s - réponse: %s\n" % (
+                    obj.evaluateur_2,
+                    obj.dateenvoi_2 and obj.dateenvoi_2.strftime('%d/%m/%Y') or "?",
+                    obj.date_evaluation_evaluateur_2 and obj.date_evaluation_evaluateur_2.strftime('%d/%m/%Y') or "?",
+                    obj.reponse_2 or u"?")
+
+            if obj.evaluateur_3:
+                remarques += u"Évaluateur 3: %s - envoi: %s - evaluation: %s - réponse: %s\n" % (
+                    obj.evaluateur_3,
+                    obj.dateenvoi_3 and obj.dateenvoi_3.strftime('%d/%m/%Y') or "?",
+                    obj.date_evaluation_evaluateur_3 and obj.date_evaluation_evaluateur_3.strftime('%d/%m/%Y') or "?",
+                    obj.reponse_3 or u"?")
+
+            remarques += obj.remarques or u""
+            sheet.write_merge(row + 1, row + 1, 2, len(fields) + 2, remarques, remarques_cellstyle)
+            sheet.row(row + 1).height = len(remarques.split('\n')) * 350 if remarques else 0
 
 
         # enregistre le fichier
@@ -181,7 +209,8 @@ class ExportButton(ViewletBase):
                    href="%(url)s/excelexport.xls">
                     <img width="16" height="16" title="Export excel" alt="Export excel"
                          src="%(portal_url)s/xls.png">
-                <span>Export excel</span></a>
-               """ % {'url': self.context.absolute_url(),
+                <span>Export excel de "%(title)s"</span></a>
+               """ % {'title': self.context.Title(),
+                      'url': self.context.absolute_url(),
                       'portal_url': self.site_url}
 
