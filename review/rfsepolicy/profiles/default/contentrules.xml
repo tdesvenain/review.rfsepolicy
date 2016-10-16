@@ -224,9 +224,9 @@
      <element>article-publie</element>
     </property>
    </condition>
-   <condition type="plone.conditions.WorkflowState">
-    <property name="wf_states">
-     <element>article-publie</element>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>article</element>
     </property>
    </condition>
   </conditions>
