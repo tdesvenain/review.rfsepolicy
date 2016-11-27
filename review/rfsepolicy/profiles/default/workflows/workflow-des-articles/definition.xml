@@ -1,268 +1,253 @@
 <?xml version="1.0"?>
 <dc-workflow workflow_id="workflow-des-articles" title="Workflow des articles" description=" - Simple workflow that is useful for basic web sites. - Things start out as private, and can either be submitted for review, or published directly. - The creator of a content item can edit the item even after it is published." state_variable="review_state" initial_state="article-recu" manager_bypass="False">
  <permission>Access contents information</permission>
- <permission>Change portal events</permission>
- <permission>Modify portal content</permission>
- <permission>View</permission>
  <permission>Add portal content</permission>
- <permission>Review portal content</permission>
+ <permission>Change portal events</permission>
  <permission>List folder contents</permission>
+ <permission>Modify portal content</permission>
+ <permission>Review portal content</permission>
+ <permission>View</permission>
  <state state_id="article-accepte" title="Article accepté">
   <exit-transition transition_id="publier-larticle"/>
+  <exit-transition transition_id="remettre-en-recu"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
  <state state_id="article-aux-normes" title="Article aux normes">
-  <exit-transition transition_id="juge-pertinent"/>
   <exit-transition transition_id="refuser-larticle"/>
+  <exit-transition transition_id="juge-pertinent"/>
+  <exit-transition transition_id="remettre-en-recu"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
- </state>
- <state state_id="article-publie" title="Article publié">
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="Review portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
  <state state_id="article-en-evaluation" title="Article en évaluation">
-  <exit-transition transition_id="rapports-recus"/>
+  <exit-transition transition_id="publier-larticle"/>
+  <exit-transition transition_id="refuser-larticle"/>
+  <exit-transition transition_id="remettre-en-recu"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
  <state state_id="article-evalue" title="Article évalué">
-  <exit-transition transition_id="accepter-larticle"/>
   <exit-transition transition_id="demander-une-nouvelle-evaluation"/>
   <exit-transition transition_id="refuser-larticle"/>
+  <exit-transition transition_id="remettre-en-recu"/>
+  <exit-transition transition_id="accepter-larticle"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
  <state state_id="article-pertinent" title="Article pertinent">
+  <exit-transition transition_id="remettre-en-recu"/>
   <exit-transition transition_id="mettre-en-evaluation"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
- <state state_id="article-recu" title="Article reçu">
-  <exit-transition transition_id="juge-aux-normes"/>
-  <exit-transition transition_id="refuser-larticle"/>
+ <state state_id="article-publie" title="Article publié">
+  <exit-transition transition_id="remettre-en-recu"/>
+  <exit-transition transition_id="mettre-en-evaluation"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Add portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
   </permission-map>
   <permission-map name="List folder contents" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
-   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Review portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="article-recu" title="Article reçu">
+  <exit-transition transition_id="publier-larticle"/>
+  <exit-transition transition_id="mettre-en-evaluation"/>
+  <exit-transition transition_id="refuser-larticle"/>
+  <exit-transition transition_id="juge-pertinent"/>
+  <exit-transition transition_id="accepter-larticle"/>
+  <exit-transition transition_id="juge-aux-normes"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
+  </permission-map>
+  <permission-map name="List folder contents" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Member</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
  <state state_id="cadavre" title="Cadavre">
+  <exit-transition transition_id="remettre-en-recu"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Member</permission-role>
@@ -304,13 +289,6 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
- <transition transition_id="publier-larticle" title="Publier l'article" new_state="article-publie" trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_status_modify?workflow_action=publier-larticle" category="workflow" icon="">Publier l'article</action>
-  <guard>
-   <guard-role>Site Administrator</guard-role>
-   <guard-role>Manager</guard-role>
-  </guard>
- </transition>
  <transition transition_id="demander-une-nouvelle-evaluation" title="Demander une nouvelle évaluation" new_state="article-en-evaluation" trigger="USER" before_script="" after_script="">
   <action url="" category="workflow" icon="">Demander une nouvelle évaluation</action>
   <guard>
@@ -342,13 +320,14 @@
    <guard-role>Editor</guard-role>
   </guard>
  </transition>
- <transition transition_id="rapports-recus" title="Rapports reçus" new_state="article-evalue" trigger="USER" before_script="" after_script="">
-  <action url="" category="workflow" icon="">Rapports reçus</action>
+ <transition transition_id="publier-larticle" title="Publier l'article" new_state="article-publie" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=publier-larticle" category="workflow" icon="">Publier l'article</action>
   <guard>
    <guard-role>Site Administrator</guard-role>
    <guard-role>Manager</guard-role>
-   <guard-role>Editor</guard-role>
   </guard>
+ </transition>
+ <transition transition_id="rapports-recus" remove="True">
  </transition>
  <transition transition_id="refuser-larticle" title="Refuser l'article" new_state="cadavre" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=refuser-larticle" category="workflow" icon="">Refuser l'article</action>
@@ -357,6 +336,21 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
+ <transition transition_id="remettre-en-recu" title="Remettre en reçu" new_state="article-recu" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Remettre en reçu</action>
+  <guard>
+   <guard-role>Site Administrator</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
   <description>Previous transition</description>
   <default>

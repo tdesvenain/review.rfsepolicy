@@ -3,6 +3,7 @@
  <property
     name="title">Contains workflow definitions for your portal</property>
  <object name="workflow-des-articles" meta_type="Workflow"/>
+ <object name="workflow-des-compte-rendus" meta_type="Workflow"/>
  <bindings>
   <default>
    <bound-workflow workflow_id="intranet_workflow"/>
@@ -20,10 +21,13 @@
    <bound-workflow workflow_id="workflow-des-articles"/>
   </type>
   <type type_id="compterendu">
-   <bound-workflow workflow_id="one_state_workflow"/>
+   <bound-workflow workflow_id="workflow-des-compte-rendus"/>
   </type>
   <type type_id="presentationthese">
-   <bound-workflow workflow_id="one_state_workflow"/>
+   <bound-workflow workflow_id="workflow-des-compte-rendus"/>
+  </type>
+  <type type_id="edito">
+   <bound-workflow workflow_id="workflow-des-compte-rendus"/>
   </type>
   <type type_id="report">
    <bound-workflow workflow_id="one_state_workflow"/>
