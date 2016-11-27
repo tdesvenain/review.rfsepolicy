@@ -327,8 +327,6 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
- <transition transition_id="rapports-recus" remove="True">
- </transition>
  <transition transition_id="refuser-larticle" title="Refuser l'article" new_state="cadavre" trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=refuser-larticle" category="workflow" icon="">Refuser l'article</action>
   <guard>
