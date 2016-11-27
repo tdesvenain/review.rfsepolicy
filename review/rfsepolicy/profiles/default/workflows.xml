@@ -26,6 +26,9 @@
   <type type_id="presentationthese">
    <bound-workflow workflow_id="workflow-des-compte-rendus"/>
   </type>
+  <type type_id="edito">
+   <bound-workflow workflow_id="workflow-des-compte-rendus"/>
+  </type>
   <type type_id="report">
    <bound-workflow workflow_id="one_state_workflow"/>
   </type>
