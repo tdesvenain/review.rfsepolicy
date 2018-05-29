@@ -9,6 +9,7 @@
 
   <five:registerPackage package="." initialize=".initialize" />
 
+  <include package="ecreall.helpers.upgrade" />
   <include package="plone.principalsource" />
 
   <include package=".upgrades" />

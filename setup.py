@@ -35,7 +35,6 @@ setup(name='review.rfsepolicy',
           'plone.principalsource',
           'plone.app.workflowmanager',
           'xlwt',
-          'uwosh.northstar',
       ],
       entry_points="""
       # -*- Entry points: -*-

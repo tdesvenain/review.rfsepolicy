@@ -109,3 +109,10 @@ def v6(context):
     tool = IUpgradeTool(context)
     tool.runImportStep('review.rfsepolicy', 'contentrules')
     tool.runImportStep('review.rfsepolicy', 'workflow')
+
+
+def v10(context):
+    tool = IUpgradeTool(context)
+    #tool.runImportStep('plone.app.iterate')
+    tool.runProfile('plone.resource')
+    tool.portal.portal_migration.upgrade()
