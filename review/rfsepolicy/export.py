@@ -85,6 +85,7 @@ class ExcelExport(BrowserView):
         sheet.col(3).width = 256 * 50
         sheet.col(4).width = 256 * 20
         sheet.col(5).width = 256 * 20
+        sheet.col(6).width = 256 * 20
         headerline = 3
 
         # schema de l'article
@@ -102,7 +103,7 @@ class ExcelExport(BrowserView):
         sheet.write(headerline, 2, u"État", headerstyle)
         fields = [(name, field)
                   for name, field in getFieldsInOrder(schema)
-                  if name in ('auteur', 'date_de_r_ception', 'referent_user')]
+                  if name in ('auteur', 'date_de_r_ception', 'referent_user', 'thema')]
         for num, fieldinfo in enumerate(fields):
             name, field = fieldinfo
             sheet.write(headerline, num+3, field.title, headerstyle)
